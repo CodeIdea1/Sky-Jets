@@ -18,7 +18,7 @@
   height: 100vh;
   z-index: 10;
   pointer-events: none;
-  transition: none;
+  will-change: transform;
 }
 
 @media (max-width: 768px) {
@@ -213,6 +213,7 @@
   color: white;
   z-index: 100;
   pointer-events: auto;
+  will-change: transform;
 }
 
 @media (max-width: 1024px) {
@@ -432,6 +433,7 @@ display: none;
   letter-spacing: -2px;
   word-spacing: 4px;
   transform-origin: center center;
+  will-change: transform;
 }
 
 @media (max-width: 1024px) {

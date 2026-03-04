@@ -23,11 +23,11 @@ export default function About() {
     
     const ctx = gsap.context(() => {
       gsap.to(container, {
-        y: -1200,
+        y: -400,
         ease: 'none',
         scrollTrigger: {
           trigger: container,
-          start: 'top bottom+=600',
+          start: 'top bottom',
           end: 'bottom top',
           scrub: 0.5,
         }
@@ -36,14 +36,9 @@ export default function About() {
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: container,
-          start: 'top bottom+=250',
-          end: 'top 77%',
-          scrub: 2,
-          onRefresh: (self) => {
-            if (!container.parentNode) {
-              self.kill(true);
-            }
-          }
+          start: 'top bottom',
+          end: 'top center',
+          scrub: 0.5,
         }
       });
 
@@ -53,9 +48,9 @@ export default function About() {
       words.forEach((word, index) => {
         tl.to(word, {
           color: '#fff',
-          duration: 0.2,
+          duration: 0.1,
           ease: 'none'
-        }, index * 0.1 + 0.5);
+        }, index * 0.05);
       });
     }, container);
 
@@ -72,31 +67,10 @@ export default function About() {
         scrollTriggerRef.current = null;
       }
 
-      const allTriggers = ScrollTrigger.getAll();
-      allTriggers.forEach(trigger => {
-        if (trigger.vars.trigger === container) {
-          trigger.kill(true);
-        }
-      });
-
       if (ctxRef.current) {
         ctxRef.current.revert();
         ctxRef.current = null;
       }
-
-      words.forEach(word => {
-        try {
-          if (word && document.body.contains(word)) {
-            gsap.set(word, { clearProps: 'all' });
-          }
-        } catch (e) {
-          // ignore
-        }
-      });
-
-      requestAnimationFrame(() => {
-        ScrollTrigger.refresh();
-      });
     };
   }, []);
 

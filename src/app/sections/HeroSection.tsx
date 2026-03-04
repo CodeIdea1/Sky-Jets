@@ -46,19 +46,16 @@ export default function HeroSection() {
         trigger: sectionRef.current,
         start: 'top top',
         end: 'bottom top',
-        scrub: 1,
+        scrub: 0.5,
         pin: planeRef.current,
         pinSpacing: false,
         onUpdate: (self) => {
-          if (planeRef.current) {
-            // إخفاء الطائرة عند 95% من التقدم
-            if (self.progress > 0.95) {
-              planeRef.current.style.opacity = '0';
-              planeRef.current.style.visibility = 'hidden';
-            } else {
-              planeRef.current.style.visibility = 'visible';
-              planeRef.current.style.opacity = '1';
-            }
+          if (planeRef.current && self.progress > 0.95) {
+            planeRef.current.style.opacity = '0';
+            planeRef.current.style.visibility = 'hidden';
+          } else if (planeRef.current) {
+            planeRef.current.style.visibility = 'visible';
+            planeRef.current.style.opacity = '1';
           }
         },
         onEnterBack: () => {
@@ -83,7 +80,7 @@ export default function HeroSection() {
         trigger: sectionRef.current,
         start: 'top top',
         end: '30% top',
-        scrub: 1,
+        scrub: 0.5,
       },
     });
     if (logoTrigger.scrollTrigger) triggers.push(logoTrigger.scrollTrigger);
@@ -105,7 +102,7 @@ export default function HeroSection() {
           trigger: sectionRef.current,
           start: 'top top',
           end: 'bottom top',
-          scrub: 1,
+          scrub: 0.5,
         },
       });
       if (leftTrigger.scrollTrigger) triggers.push(leftTrigger.scrollTrigger);
@@ -116,7 +113,7 @@ export default function HeroSection() {
           trigger: sectionRef.current,
           start: 'top top',
           end: 'bottom top',
-          scrub: 1,
+          scrub: 0.5,
         },
       });
       if (rightTrigger.scrollTrigger) triggers.push(rightTrigger.scrollTrigger);
@@ -127,7 +124,7 @@ export default function HeroSection() {
           trigger: sectionRef.current,
           start: 'top top',
           end: '50% top',
-          scrub: 1,
+          scrub: 0.5,
         },
       });
       if (leftTrigger.scrollTrigger) triggers.push(leftTrigger.scrollTrigger);
@@ -138,7 +135,7 @@ export default function HeroSection() {
           trigger: sectionRef.current,
           start: 'top top',
           end: '50% top',
-          scrub: 1,
+          scrub: 0.5,
         },
       });
       if (rightTrigger.scrollTrigger) triggers.push(rightTrigger.scrollTrigger);
