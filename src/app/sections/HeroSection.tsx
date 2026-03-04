@@ -164,7 +164,7 @@ export default function HeroSection() {
       <div ref={planeRef} className={styles.planeContainer}>
         <div className={`${styles.PlaneWindow} ${hasAnimated ? styles.noAnimation : ''}`}></div>
         <img src={isMobile ? "/PlaneWindowLayerMobile.png" : "/PlaneWindowLayer.webp"} alt="" className={styles.PlaneWindowLayer} />
-        <img src={isMobile ? "/planeHeroMobile.png" : "/planeHero.svg"} alt="Plane" className={styles.plane} />
+        <img src={isMobile ? "/planeHeroMobile.png" : "/planeHero.webp"} alt="Plane" className={styles.plane} />
         <div className={styles.content}>
           <div ref={leftColumnRef} className={styles.leftColumn}>
             <h2 className={styles.title}>We are <br /> movement</h2>
