@@ -1,0 +1,238 @@
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  padding: 20px 0;
+}
+
+.navContainer {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+}
+
+@media (max-width: 768px) {
+  .navContainer {
+    padding: 0 20px;
+    justify-content: flex-end;
+  }
+}
+
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+  z-index: 1002;
+}
+
+@media (max-width: 768px) {
+  .hamburger {
+    display: flex;
+  }
+}
+
+.line {
+  width: 25px;
+  height: 3px;
+  background-color: white;
+  transition: all 0.3s ease;
+  border-radius: 2px;
+}
+
+.hamburger.dark .line {
+  background-color: black;
+}
+
+.lineOpen:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+
+.lineOpen:nth-child(2) {
+  opacity: 0;
+}
+
+.lineOpen:nth-child(3) {
+  transform: rotate(-45deg) translate(5px, -5px);
+}
+
+.navLinks {
+  display: flex;
+  list-style: none;
+  gap: 40px;
+  margin: 0;
+  padding: 0;
+}
+
+@media (min-width: 769px) {
+  .navLinks li {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .navLinks {
+    position: fixed;
+    top: 70px;
+    right: 20px;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0;
+    background: transparent;
+    pointer-events: none;
+    z-index: 99999999;
+  }
+
+  .navLinks li {
+    opacity: 0;
+    transform: translateX(50px);
+    pointer-events: none;
+    will-change: transform, opacity;
+  }
+
+  .navLinksOpen li {
+    pointer-events: auto;
+  }
+}
+
+.navLinks a {
+  color: white;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 600;
+  transition: opacity 0.3s;
+}
+
+.navLinks.dark a {
+  color: black;
+}
+
+@media (max-width: 768px) {
+  .navLinks a {
+    color: black;
+    font-size: 18px;
+    background: white;
+    backdrop-filter: blur(10px);
+    padding: 12px 24px;
+    border-radius: 8px;
+    display: block;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .navLinks a:active {
+    transform: scale(0.95);
+  }
+}
+
+.navLinks a:hover {
+  opacity: 0.7;
+}
+
+.contactLinks {
+  display: flex;
+  gap: 30px;
+  align-items: center;
+}
+
+@media (min-width: 769px) {
+  .contactLinks {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .contactLinks {
+    position: fixed;
+    bottom: 30px;
+    right: 20px;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 10px;
+    opacity: 0;
+    transform: translateX(50px);
+    pointer-events: none;
+    will-change: transform, opacity;
+  }
+
+  .contactLinksOpen {
+    pointer-events: auto;
+    z-index: 99999999;
+  }
+}
+
+.contactLink {
+  color: white;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 600;
+  transition: opacity 0.3s;
+}
+
+.contactLinks.dark .contactLink {
+  color: black;
+}
+
+@media (max-width: 768px) {
+  .contactLink {
+    color: black;
+    font-size: 14px;
+    background: white;
+    backdrop-filter: blur(10px);
+    padding: 10px 20px;
+    border-radius: 8px;
+    display: block;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .contactLink:active {
+    transform: scale(0.95);
+  }
+}
+
+.contactLink:hover {
+  opacity: 0.7;
+}
+
+.overlay {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .overlay {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+    z-index: 999;
+    animation: fadeIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+

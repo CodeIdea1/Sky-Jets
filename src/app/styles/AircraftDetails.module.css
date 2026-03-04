@@ -1,0 +1,389 @@
+.section {
+  height: 100vh;
+  padding: 5rem 1.5rem;
+  background: linear-gradient(to bottom, #E8EFF7, #EFE8DE, #EFE8DE);
+  position: relative;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  --shadow-color: #6b3f20d2;
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding: 2rem 0;
+    overflow: visible;
+  }
+}
+
+.section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 90%;
+  background: linear-gradient(to bottom, color-mix(in srgb,  var(--shadow-color) calc(var(--shadow-opacity, 0) * 100%), transparent), transparent);
+  pointer-events: none;
+  z-index: 5;
+}
+
+.container {
+  width: 93%;
+  padding: 0 2rem;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 122vh;
+}
+
+@media (max-width: 768px) {
+  .container {
+    width: 100%;
+    padding: 0 1rem;
+    height: 100vh;
+  }
+}
+
+.hiddenContent {
+  padding-top: 56vh;
+  margin-bottom: 15vh;
+  display: grid;
+  grid-template-columns: 1fr .4fr;
+  gap: 3rem;
+}
+
+@media (max-width: 768px) {
+  .hiddenContent {
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    padding-top: 30vh;
+    margin-bottom: 8vh;
+  }
+}
+
+.visibleContent {
+  display: grid;
+  grid-template-columns: 2.5fr 1fr;
+  align-items: start;
+  justify-content: start;
+}
+
+@media (max-width: 768px) {
+  .visibleContent {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+}
+
+.visibleRight {
+  align-self: end;
+}
+
+
+.mainTitle {
+  font-size: 3rem;
+  font-weight: 700;
+  color: #322726;
+  margin-bottom: 2rem;
+}
+
+@media (max-width: 768px) {
+  .mainTitle {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+  }
+}
+
+.subTitle {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #322726;
+  margin-bottom: 1rem;
+}
+
+@media (max-width: 768px) {
+  .subTitle {
+    font-size: 1.1rem;
+  }
+}
+
+.label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #6b7280;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.aircraftModel {
+  font-size: 4rem;
+  font-weight: 700;
+  color: #322726;
+  margin-bottom: 2rem;
+}
+
+@media (max-width: 768px) {
+  .aircraftModel {
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+  }
+}
+
+.statsGrid {
+  display: grid;
+  grid-template-columns: .3fr 1fr;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+@media (max-width: 768px) {
+  .statsGrid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+}
+
+.statItem {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.statLabel {
+  font-size: 0.85rem;
+  color: #6b7280;
+  font-weight: 500;
+}
+
+.statValue {
+  font-size: 1.2rem;
+  color: #322726;
+  font-weight: 700;
+}
+
+.specsGrid {
+  display: grid;
+  grid-template-columns: .3fr 1fr;
+  gap: 2rem;
+}
+
+@media (max-width: 768px) {
+  .specsGrid {
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+}
+
+.specLabel {
+  font-size: 0.85rem;
+  color: #6b7280;
+  font-weight: 600;
+  display: block;
+  margin-bottom: 1rem;
+}
+
+.specItem {
+  font-size: 0.9rem;
+  color: #6b7280;
+  margin-bottom: 0.5rem;
+}
+
+.specValue {
+  font-size: 0.9rem;
+  color: #322726;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.subtitle {
+  font-size: 0.875rem;
+  color: #6b7280;
+  margin-bottom: 1rem;
+}
+
+.title {
+  font-size: 6.3rem;
+  font-weight: 600;
+  margin-bottom: 2rem;
+  color: #322726;
+  letter-spacing: -3px;
+  transform: scaleX(1.6);
+  transform-origin: left center;
+}
+
+@media (max-width: 768px) {
+  .title {
+    font-size: 2.5rem;
+    letter-spacing: -1px;
+    transform: scaleX(1.2);
+    margin-bottom: 1rem;
+  }
+}
+
+.titleBold {
+  font-size: 1.8rem;
+  font-weight: 700;
+  line-height: .9;
+  color: #322726;
+}
+
+@media (max-width: 768px) {
+  .titleBold {
+    font-size: 1.2rem;
+  }
+}
+
+.heading {
+  font-size: 6.3rem;
+  font-weight: 600;
+  margin-bottom: 130px;
+  color: #322726;
+  transform: scaleX(1.6);
+  transform-origin: left center;
+  letter-spacing: -3px;
+  margin-left: -70px;
+}
+
+@media (max-width: 768px) {
+  .heading {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    margin-left: 0;
+    letter-spacing: -1px;
+    transform: scaleX(1.2);
+  }
+}
+
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+  border-top: 1px solid #32272619;
+  padding-top: 14px;
+}
+
+.model {
+  font-size: .9rem;
+  font-weight: 800;
+  color: #322726;
+  margin-bottom: 10px;
+}
+
+.modelBold {
+  font-size: .9rem;
+  font-weight: 800;
+  color: #322726;
+}
+
+.description {
+  color: #322726;
+  font-size: 15px;
+  line-height: 1.4;
+  max-width: 330px;
+  font-weight: 800;
+}
+
+@media (max-width: 768px) {
+  .description {
+    font-size: 13px;
+    max-width: 100%;
+    font-weight: 600;
+  }
+}
+
+.planeContainer {
+  position: absolute;
+  bottom: -1500px;
+  left: 50%;
+  transform: translate3d(-50%, 0, 0);
+  z-index: 10;
+  pointer-events: none;
+  will-change: transform;
+  backface-visibility: hidden;
+  perspective: 1000px;
+  --mask-position: 0%;
+  mask-image: linear-gradient(
+    to top,
+    transparent var(--mask-position),
+    black calc(var(--mask-position) + 20%)
+  );
+  -webkit-mask-image: linear-gradient(
+    to top,
+    transparent var(--mask-position),
+    black calc(var(--mask-position) + 20%)
+  );
+}
+
+@media (max-width: 768px) {
+  .planeContainer {
+    bottom: -800px;
+  }
+}
+
+.frameContainer {
+  position: absolute;
+  bottom: 70px;
+  left: 50.3%;
+  transform: translate3d(-50%, 0, 0) scale(0.7);
+  z-index: 9;
+  pointer-events: none;
+  will-change: opacity;
+  backface-visibility: hidden;
+  perspective: 1000px;
+  --frame-mask-position: 100%;
+  mask-image: linear-gradient(
+    to top,
+    black calc(100% - var(--frame-mask-position)),
+    transparent calc(100% - var(--frame-mask-position) + 20%)
+  );
+  -webkit-mask-image: linear-gradient(
+    to top,
+    black calc(100% - var(--frame-mask-position)),
+    transparent calc(100% - var(--frame-mask-position) + 20%)
+  );
+}
+
+@media (max-width: 768px) {
+  .frameContainer {
+    bottom: -90px;
+  }
+}
+
+.plane {
+  width: 1700px;
+  height: auto;
+  display: block;
+  transform: translateZ(0);
+}
+
+@media (max-width: 768px) {
+  .plane {
+    width: 900px;
+  }
+}
+
+.frame {
+  width: 680px;
+  height: auto;
+  display: block;
+  transform: translateZ(0);
+}
+
+@media (max-width: 768px) {
+  .frame {
+    width:500px;
+  }
+}
+
+@media (max-width: 768px) {
+
+  .visibleRight {
+    align-self: start;
+  }
+  .statLabel {
+    max-width: 150px;
+  }
+}
