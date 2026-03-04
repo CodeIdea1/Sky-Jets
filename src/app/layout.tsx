@@ -5,6 +5,7 @@ import "lenis/dist/lenis.css";
 import Navbar from "./components/Navbar";
 import LenisProvider from "@/components/LenisProvider";
 import ResponsiveReloadWrapper from "@/components/ResponsiveReloadWrapper";
+import LoadingScreen from "./components/LoadingScreen";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -38,6 +39,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable} ${archivo.variable}`}>
+        <LoadingScreen />
         <ResponsiveReloadWrapper>
           <LenisProvider>
             <Navbar />

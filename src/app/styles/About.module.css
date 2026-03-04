@@ -202,7 +202,7 @@ max-width: 88%;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
     -ms-overflow-style: none;
-    gap: 1.5rem;
+    gap: 0rem;
   }
 
   .rightColumn::-webkit-scrollbar {

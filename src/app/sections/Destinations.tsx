@@ -16,12 +16,28 @@ export default function Destinations() {
   const titleRef = useRef<HTMLHeadingElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const [shouldLoad, setShouldLoad] = useState(false);
+  const [globeLoaded, setGlobeLoaded] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          requestIdleCallback(() => setShouldLoad(true));
+          const callback = () => setShouldLoad(true);
+          if ('requestIdleCallback' in window) {
+            requestIdleCallback(callback);
+          } else {
+            setTimeout(callback, 100);
+          }
           observer.disconnect();
         }
       },
@@ -39,48 +55,63 @@ export default function Destinations() {
     if (!shouldLoad || !globeEl.current || typeof window === 'undefined') return;
 
     let globe: any;
+    let timeoutId: NodeJS.Timeout;
 
     const loadGlobe = async () => {
-      const GlobeModule = await import('globe.gl');
-      const GlobeGL = GlobeModule.default;
-      
-      globe = GlobeGL()
-        (globeEl.current!)
-        .globeImageUrl('//unpkg.com/three-globe/example/img/earth-blue-marble.jpg')
-        .width(globeEl.current!.offsetWidth)
-        .height(globeEl.current!.offsetHeight)
-        .atmosphereColor('rgba(0,0,0,0)')
-        .atmosphereAltitude(0)
-        .showGraticules(false)
-        .backgroundColor('rgba(0,0,0,0)');
+      try {
+        const GlobeModule = await import('globe.gl');
+        const GlobeGL = GlobeModule.default;
+        
+        if (!globeEl.current) return;
 
-      globe.controls().autoRotate = true;
-      globe.controls().autoRotateSpeed = 0.8;
-      globe.controls().enableZoom = false;
-      globe.controls().enablePan = false;
-      globe.controls().enableRotate = false;
+        globe = GlobeGL()
+          (globeEl.current)
+          .globeImageUrl('https://unpkg.com/three-globe@2.31.0/example/img/earth-blue-marble.jpg')
+          .width(globeEl.current.offsetWidth)
+          .height(globeEl.current.offsetHeight)
+          .atmosphereColor('rgba(0,0,0,0)')
+          .atmosphereAltitude(0)
+          .showGraticules(false)
+          .backgroundColor('rgba(0,0,0,0)');
 
-      const arcs = [
-        { startLat: 25.2048, startLng: 55.2708, endLat: 51.5074, endLng: -0.1278, color: 'rgba(150, 150, 150, 0.6)' },
-        { startLat: -33.8688, startLng: 151.2093, endLat: 40.7128, endLng: -74.0060, color: 'rgba(150, 150, 150, 0.6)' },
-        { startLat: 35.6762, startLng: 139.6503, endLat: 1.3521, endLng: 103.8198, color: 'rgba(150, 150, 150, 0.6)' },
-      ];
+        globe.controls().autoRotate = true;
+        globe.controls().autoRotateSpeed = 0.8;
+        globe.controls().enableZoom = false;
+        globe.controls().enablePan = false;
+        globe.controls().enableRotate = false;
 
-      globe
-        .arcsData(arcs)
-        .arcColor('color')
-        .arcDashLength(1.5)
-        .arcDashGap(0.5)
-        .arcDashAnimateTime(3000)
-        .arcStroke(0.5)
-        .arcAltitude(0.4);
+        const arcs = [
+          { startLat: 25.2048, startLng: 55.2708, endLat: 51.5074, endLng: -0.1278, color: 'rgba(150, 150, 150, 0.6)' },
+          { startLat: -33.8688, startLng: 151.2093, endLat: 40.7128, endLng: -74.0060, color: 'rgba(150, 150, 150, 0.6)' },
+          { startLat: 35.6762, startLng: 139.6503, endLat: 1.3521, endLng: 103.8198, color: 'rgba(150, 150, 150, 0.6)' },
+        ];
+
+        globe
+          .arcsData(arcs)
+          .arcColor('color')
+          .arcDashLength(1.5)
+          .arcDashGap(0.5)
+          .arcDashAnimateTime(3000)
+          .arcStroke(0.5)
+          .arcAltitude(0.4);
+
+        timeoutId = setTimeout(() => setGlobeLoaded(true), 1000);
+      } catch (error) {
+        console.error('Failed to load globe:', error);
+        setGlobeLoaded(false);
+      }
     };
 
     loadGlobe();
 
     return () => {
+      if (timeoutId) clearTimeout(timeoutId);
       if (globe && globe._destructor) {
-        globe._destructor();
+        try {
+          globe._destructor();
+        } catch (e) {
+          console.error('Error destroying globe:', e);
+        }
       }
     };
   }, [shouldLoad]);
@@ -158,13 +189,26 @@ export default function Destinations() {
       <div className={styles.container}>
         <h2 ref={titleRef} className={styles.backgroundTitle}>Global</h2>
         <div ref={globeWrapperRef} className={styles.globeWrapper}>
+          {!shouldLoad || (!globeLoaded && isMobile) ? (
+            <div className={styles.globeFallback}>
+              <div className={styles.globePlaceholder}>
+                <svg viewBox="0 0 200 200" className={styles.globeSvg}>
+                  <circle cx="100" cy="100" r="80" fill="#1a1a1a" stroke="#333" strokeWidth="1"/>
+                  <ellipse cx="100" cy="100" rx="80" ry="40" fill="none" stroke="#444" strokeWidth="0.5"/>
+                  <ellipse cx="100" cy="100" rx="40" ry="80" fill="none" stroke="#444" strokeWidth="0.5"/>
+                  <line x1="20" y1="100" x2="180" y2="100" stroke="#444" strokeWidth="0.5"/>
+                </svg>
+              </div>
+            </div>
+          ) : null}
           <div 
             ref={globeEl} 
             className={styles.globeContainer}
             style={{ 
-              opacity: shouldLoad ? 1 : 0,
+              opacity: shouldLoad && (globeLoaded || !isMobile) ? 1 : 0,
               transition: 'opacity 0.8s ease-in-out',
-              willChange: shouldLoad ? 'auto' : 'opacity'
+              willChange: shouldLoad ? 'auto' : 'opacity',
+              display: shouldLoad ? 'block' : 'none'
             }} 
           />
         </div>

@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { FaChevronDown } from 'react-icons/fa';
+import Image from 'next/image';
 import styles from '../styles/heroSection.module.css';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -16,6 +17,25 @@ export default function HeroSection() {
   const rightColumnRef = useRef<HTMLDivElement>(null);
   const [hasAnimated, setHasAnimated] = useState(true);
   const [isMobile, setIsMobile] = useState(false);
+  const [loadingComplete, setLoadingComplete] = useState(false);
+
+  useEffect(() => {
+    const checkLoading = () => {
+      const loaded = sessionStorage.getItem('siteLoaded');
+      if (loaded) {
+        setTimeout(() => setLoadingComplete(true), 1000);
+      } else {
+        const interval = setInterval(() => {
+          if (sessionStorage.getItem('siteLoaded')) {
+            setTimeout(() => setLoadingComplete(true), 1000);
+            clearInterval(interval);
+          }
+        }, 100);
+        return () => clearInterval(interval);
+      }
+    };
+    checkLoading();
+  }, []);
 
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth <= 768);
@@ -151,20 +171,38 @@ export default function HeroSection() {
       <a href="/" ref={logoRef} className={styles.logo}>Sky Jets</a>
       <div className={styles.cloudWrapper}>
         <div className={styles.cloudContainer}>
-          <img src="/ccc2.webp" alt="Cloud" className={styles.cloud} />
-          <img src="/ccc2.webp" alt="Cloud" className={styles.cloud} />
+          <Image src="/ccc2.webp" alt="Cloud" className={styles.cloud} width={800} height={400} loading="eager" />
+          <Image src="/ccc2.webp" alt="Cloud" className={styles.cloud} width={800} height={400} loading="eager" />
         </div>
       </div>
       <div className={styles.cloudWrapper2}>
         <div className={styles.cloudContainer2}>
-          <img src="/ccc2.webp" alt="Cloud" className={styles.cloud} />
-          <img src="/ccc2.webp" alt="Cloud" className={styles.cloud} />
+          <Image src="/ccc2.webp" alt="Cloud" className={styles.cloud} width={800} height={400} loading="eager" />
+          <Image src="/ccc2.webp" alt="Cloud" className={styles.cloud} width={800} height={400} loading="eager" />
         </div>
       </div>
       <div ref={planeRef} className={styles.planeContainer}>
-        <div className={`${styles.PlaneWindow} ${hasAnimated ? styles.noAnimation : ''}`}></div>
-        <img src={isMobile ? "/PlaneWindowLayerMobile.png" : "/PlaneWindowLayer.webp"} alt="" className={styles.PlaneWindowLayer} />
-        <img src={isMobile ? "/planeHeroMobile.png" : "/planeHero.webp"} alt="Plane" className={styles.plane} />
+        <div className={`${styles.PlaneWindow} ${!loadingComplete ? styles.hideAnimation : styles.startAnimation}`}></div>
+        <Image 
+          src={isMobile ? "/PlaneWindowLayerMobile.png" : "/PlaneWindowLayer.webp"} 
+          alt="" 
+          className={styles.PlaneWindowLayer}
+          width={isMobile ? 600 : 1200}
+          height={isMobile ? 600 : 1200}
+          priority
+          quality={isMobile ? 75 : 90}
+          sizes="(max-width: 768px) 100vw, 1200px"
+        />
+        <Image 
+          src={isMobile ? "/planeHeroMobile.png" : "/planeHero.webp"} 
+          alt="Plane" 
+          className={styles.plane}
+          width={isMobile ? 600 : 1200}
+          height={isMobile ? 600 : 1200}
+          priority
+          quality={isMobile ? 75 : 90}
+          sizes="(max-width: 768px) 100vw, 1200px"
+        />
         <div className={styles.content}>
           <div ref={leftColumnRef} className={styles.leftColumn}>
             <h2 className={styles.title}>We are <br /> movement</h2>
