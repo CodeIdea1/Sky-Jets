@@ -27,18 +27,22 @@
   }
 }
 
+
 .PlaneWindow {
   position: fixed;
-  top: 50vh;
+  top: 38vh;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 30vw;
-  height: 35vw;
+  width: 50vw;
+  height: 49vw;
   background-color: #7D7D7D;
   z-index: -1;
   opacity: 1;
   visibility: visible;
 }
+
+
+
 
 .PlaneWindow.startAnimation {
   animation: slideUp 1.5s ease-out forwards;
@@ -65,7 +69,7 @@
 .PlaneWindow::after {
   content: '';
   position: absolute;
-  top: 68%;
+  top: 74%;
   left: 51%;
   transform: translateX(-50%);
   width: 28vw;
@@ -74,15 +78,10 @@
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
+  
 }
 
-@media (max-width: 768px) {
-  .PlaneWindow::after {
-    top: 72%;
-    width: 68vw;
-    height: 48vw;
-  }
-}
+
 
 .PlaneWindow::before {
   content: '';
@@ -94,12 +93,27 @@
   background: radial-gradient(circle, rgba(255, 255, 255, 0.9) 0%, transparent 77%);
 }
 
+
+@media (max-width: 768px) {
+
+  .PlaneWindow {
+  top: 47vh;
+}
+  .PlaneWindow::after {
+    top: 66%;
+    width: 68vw;
+    height: 48vw;
+  }
+}
+
+
+
 @keyframes slideUp {
   from {
     transform: translate(-50%, -50%);
   }
   to {
-    transform: translate(-50%, calc(-50% - 62vh));
+    transform: translate(-50%, calc(-50% - 60vh));
   }
 }
 
@@ -109,7 +123,7 @@
       transform: translate(-50%, -50%);
     }
     to {
-      transform: translate(-50%, calc(-50% - 45vh));
+      transform: translate(-50%, calc(-50% - 35vh));
     }
   }
 }

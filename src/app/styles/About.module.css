@@ -180,6 +180,9 @@ max-width: 88%;
     min-height: auto;
     z-index: 99;
   }
+  .colDesc {
+    color: rgb(42, 42, 42);
+  }
   .contentRow {
     flex-direction: column;
     gap: 2rem;
