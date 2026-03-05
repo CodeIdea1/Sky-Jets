@@ -16,7 +16,7 @@ export default function LoadingScreen() {
     }
 
     const isMobile = window.innerWidth <= 768;
-    const minLoadTime = isMobile ? 2000 : 700;
+    const minLoadTime = isMobile ? 2800 : 700;
     const startTime = Date.now();
 
     const handleLoad = () => {
@@ -28,7 +28,7 @@ export default function LoadingScreen() {
         setTimeout(() => {
           setIsLoading(false);
           sessionStorage.setItem('siteLoaded', 'true');
-        }, 500);
+        }, 1000);
       }, remainingTime);
     };
 

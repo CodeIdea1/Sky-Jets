@@ -4,17 +4,19 @@
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #392E23 0%, #5B4E40 100%);
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 9999;
-  transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
+  opacity: 1;
+  transition: opacity 1s ease-in-out, transform 0.8s ease-in-out;
 }
 
 .loadingScreen.fadeOut {
   opacity: 0;
-  visibility: hidden;
+  transform: scale(1.05);
+  pointer-events: none;
 }
 
 .content {
