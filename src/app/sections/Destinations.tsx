@@ -246,7 +246,7 @@ export default function Destinations() {
 
           <footer className={styles.contentFooter}>
             <p className={styles.copyright}>©2026 jesko jets. All rights reserved</p>
-            <p className={styles.madeBy}>Made by</p>
+            <p className={styles.madeBy}>Made by Codeidea</p>
           </footer>
         </div>
       </div>

@@ -166,6 +166,10 @@
   filter: grayscale(100%) contrast(1.3) brightness(0.6) saturate(0);
 }
 
+.globeContainer canvas {
+  touch-action: auto !important;
+}
+
 @media (max-width: 480px) {
   .globeContainer {
     height: 600px;
